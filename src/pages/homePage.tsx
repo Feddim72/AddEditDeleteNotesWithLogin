@@ -19,7 +19,7 @@ import { MdDeleteOutline } from "react-icons/md";
 
 const HomePage = () => {
   const [viewToastState, setViewToastState] = useState<viewToast>({});
-  const { control, handleSubmit } = useForm<IViewLoginModel>();
+  const { control, handleSubmit, setError } = useForm<IViewLoginModel>();
   const navigate = useNavigate();
   const location = useLocation();
   const { login } = useAuth();
@@ -34,7 +34,21 @@ const HomePage = () => {
           navigate(redirectPathname, { state: { email: data } });
         })
         .catch((error) => {
-          const errorMessage = error.response.data?.Error;
+          const errorMessage = error.response.data?.errorCode;
+          if (errorMessage == "NotAuthorized") {
+            setError("email", {
+              type: "manual",
+              message: "Incorrect e-mail or password",
+            });
+            setError("password", {
+              type: "manual",
+              message: "Incorrect e-mail or password",
+            });
+          } else {
+            setViewToastState({
+              colorView: "red",
+            });
+          }
           console.log("errorMessage =", errorMessage);
         })
     );
@@ -42,7 +56,7 @@ const HomePage = () => {
   const developmentStage = () => {
     setViewToastState({
       colorView: "blue",
-      message: "This function, not implemented in backend.",
+      message: "This function, not implemented.",
     });
   };
 
