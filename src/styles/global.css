@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+   color: rgb(55 65 81);
+   letter-spacing: 0.6px;
+}
+
+body.-lock {
+   overflow: hidden;
+}
+
+h1 {
+   font-family: cursive; 
+}
+
+.background-btn {
+   letter-spacing: 1.2px;
+   text-transform: uppercase;
+   font-weight: bold;
+   color: white;
+   height: 40px;
+   border-radius: 45px;
+   background: rgb(45, 197, 255);
+   background: -moz-linear-gradient(90deg, rgba(45, 197, 255, 1) 0%, rgba(200, 128, 255, 1) 41%, rgba(227, 106, 225, 1) 65%, rgba(255, 45, 221, 1) 88%, rgba(255, 0, 219, 1) 100%);
+   background: -webkit-linear-gradient(90deg, rgba(45, 197, 255, 1) 0%, rgba(200, 128, 255, 1) 41%, rgba(227, 106, 225, 1) 65%, rgba(255, 45, 221, 1) 88%, rgba(255, 0, 219, 1) 100%);
+   background: linear-gradient(90deg, rgba(45, 197, 255, 1) 0%, rgba(200, 128, 255, 1) 41%, rgba(227, 106, 225, 1) 65%, rgba(255, 45, 221, 1) 88%, rgba(255, 0, 219, 1) 100%);
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2dc5ff", endColorstr="#ff00db", GradientType=1);
+}
+
+.background-btn:hover{ 
+   background: rgba(45, 197, 255, 1); 
+}
+
+.logout-btn {
+   letter-spacing: 1.2px;
+   text-transform: uppercase;
+   font-weight: bold;
+   color: white;
+   height: 40px;
+   border-radius: 45px;
+   background: rgb(252,176,69);
+   background: -moz-radial-gradient(circle, rgba(252,176,69,1) 0%, rgba(253,29,29,1) 50%, rgba(131,58,180,1) 100%);
+   background: -webkit-radial-gradient(circle, rgba(252,176,69,1) 0%, rgba(253,29,29,1) 50%, rgba(131,58,180,1) 100%);
+   background: radial-gradient(circle, rgba(252,176,69,1) 0%, rgba(253,29,29,1) 50%, rgba(131,58,180,1) 100%);
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fcb045",endColorstr="#833ab4",GradientType=1);
+   border-color: white;
+   border-width:2px;
+}
+
+.logout-btn:hover{
+   background: rgb(34,193,195);
+   background: -moz-linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 91%);
+   background: -webkit-linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 91%);
+   background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 91%);
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#22c1c3",endColorstr="#fdbb2d",GradientType=1);  
+}
+
+
+.modal {
+   height: 100vh;
+   width: 100vw;
+   background-color: rgba(0,0,0,0.4);
+   position: fixed;
+   top: 0;
+   left: 0;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   opacity: 0;
+   pointer-events: none;
+   transition: .5s; 
+}
+
+.modal .modal__content{ 
+   width: 500px;
+   transform: scale(.5);
+   transition: .4s all; 
+}
+
+.modal .modal__content .item__img {
+   border-radius: 16px;
+   object-fit: cover;
+   height: inherit;
+}
+
+.modal.active {
+   opacity: 1;
+   pointer-events: all;
+}
+
+.modal__content.active {
+   transform: scale(1);
+}
+
+.slowViewBlockLeft {
+   animation: showLeft 1s;
+}
+
+@keyframes showLeft {
+
+   from {left:-100%;}
+   
+   to {left:0;}
+   
+}
+
+.slowViewBlock { animation: show 3s;}
+
+@keyframes show {
+   from {opacity: 0;} 
+   to {opacity: 1;}
+
+}
+
+.animationDelay2 {
+   animation-delay: 2s;
+   animation-duration: 2s;
+   animation-fill-mode: both;
+}
+.animationDelay4 {
+   animation-delay: 4s;
+   animation-duration: 2s;
+   animation-fill-mode: both;
+}
+.animationDelay6 {
+   animation-delay: 6s;
+   animation-duration: 2s;
+   animation-fill-mode: both;
+}
