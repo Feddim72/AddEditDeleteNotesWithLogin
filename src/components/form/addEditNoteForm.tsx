@@ -46,7 +46,7 @@ export const AddEditNoteForm = ({
           control={control}
           name="details"
           label={"details"}
-          rules={{ maxLength: 400 }}
+          rules={{ required: true, maxLength: 400, minLength: 8 }}
         />
       </div>
       <button type="submit" className="logout-btn px-5 py-1 mt-5">
