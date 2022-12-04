@@ -18,6 +18,12 @@ const FieldTooltipError = ({
   rules,
 }: FieldTooltipErrorProps) => {
   const { t } = useTranslation("common");
+  // todo
+  const validation: any = {
+    required: "The field required",
+    maxLength: "Too many characters",
+    minLength: "Minimum number of characters 8",
+  };
 
   return error ? (
     <div
@@ -38,7 +44,8 @@ const FieldTooltipError = ({
           i18nKey={
             error.message && error.type !== "required"
               ? error.message
-              : `common:form.validation.${error.type}`
+              : validation[error.type]
+            // : `common:form.validation.${error.type}`
           }
           values={
             rules

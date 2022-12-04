@@ -70,8 +70,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             }`}
             htmlFor={id || props.name}
           >
-            {/* {type === "email" && <HiOutlineMail />}
-            {type === "password" && <HiOutlineLockClosed />}  */}
             {labelIcons}
             {label}
             {rules?.required === true && (

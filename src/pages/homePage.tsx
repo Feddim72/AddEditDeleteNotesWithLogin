@@ -19,7 +19,12 @@ import { MdDeleteOutline } from "react-icons/md";
 
 const HomePage = () => {
   const [viewToastState, setViewToastState] = useState<viewToast>({});
-  const { control, handleSubmit, setError } = useForm<IViewLoginModel>();
+  const { control, handleSubmit, setError } = useForm<IViewLoginModel>({
+    defaultValues: {
+      email: "feddim72@gmail.com",
+      password: "feddim72@gmail.com",
+    },
+  });
   const navigate = useNavigate();
   const location = useLocation();
   const { login } = useAuth();
