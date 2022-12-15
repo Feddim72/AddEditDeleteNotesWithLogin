@@ -39,6 +39,7 @@ const ForgotPassword = () => {
           </div>
 
           <button
+            type="button"
             onClick={() => developmentStage()}
             className="w-full bg background-btn mt-8"
           >

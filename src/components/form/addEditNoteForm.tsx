@@ -8,11 +8,13 @@ interface AddNoteProps {
   mode: "add" | "edit";
   hadelAddEditNote: (data: FormValue) => void;
   setCloseModal: () => void;
+  isLoading: boolean;
 }
 export const AddEditNoteForm = ({
   hadelAddEditNote,
   setCloseModal,
   mode,
+  isLoading,
 }: AddNoteProps) => {
   const { control, handleSubmit, reset } = useFormContext<FormValue>();
   return (
@@ -49,7 +51,12 @@ export const AddEditNoteForm = ({
           rules={{ required: true, maxLength: 400, minLength: 8 }}
         />
       </div>
-      <button type="submit" className="logout-btn px-5 py-1 mt-5">
+      <button
+        type="submit"
+        className={`${
+          isLoading && "pointer-events-none"
+        } logout-btn px-5 py-1 mt-5`}
+      >
         <span>{mode == "add" ? "add note" : "edit note"}</span>
       </button>
     </form>

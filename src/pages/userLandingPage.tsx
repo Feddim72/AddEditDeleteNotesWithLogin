@@ -77,7 +77,7 @@ const UserLandingPage = () => {
   };
   const userIdKeyForGetNoteList =
     "UserId eq " + localStorage.getItem(actualUserIdKey);
-  const { isLoading, refetch: refetchAllNotes } =
+  const { isLoading: isLoadingRefetchAllNotes, refetch: refetchAllNotes } =
     useGet<ViewListModelDtoOfViewNoteModelDto>(
       `/Note/GetAll?filter=${userIdKeyForGetNoteList}`,
       {
@@ -175,8 +175,8 @@ const UserLandingPage = () => {
     currentNote?.title && methods.setValue("titles", currentNote.title);
   }, [currentNote]);
 
-  const isFetching = !!isLoading
-    ? isLoading
+  const isLoading = !!isLoadingRefetchAllNotes
+    ? isLoadingRefetchAllNotes
     : !!isLoadingRemove
     ? isLoadingRemove
     : !!isLoadingPost
@@ -185,7 +185,7 @@ const UserLandingPage = () => {
 
   return (
     <div className="bg-[url('/public/images/bg-note.webp')] bg-cover bg-center bg-no-repeat min-h-[100vh] flex flex-col items-center">
-      {isFetching && (
+      {isLoading && (
         <img
           src="/loader.svg"
           className="mt-12 fixed top-[calc(50%-100px)] left-[calc(50%-100px)] pointer-events-none z-[100000]"
@@ -204,6 +204,7 @@ const UserLandingPage = () => {
           isOpenModal={isOpenAddNoteModal}
           children={
             <AddEditNoteForm
+              isLoading={isLoading}
               mode="add"
               setCloseModal={closeNoteModal}
               hadelAddEditNote={hadelAddEditNote}
@@ -218,6 +219,7 @@ const UserLandingPage = () => {
           isOpenModal={isOpenEditNoteModal}
           children={
             <AddEditNoteForm
+              isLoading={isLoading}
               mode="edit"
               setCloseModal={closeNoteModal}
               hadelAddEditNote={hadelAddEditNote}

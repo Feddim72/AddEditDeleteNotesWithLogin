@@ -73,7 +73,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 
         {label && (
           <div
-            className={`h-[50px] w-[99%] flex items-center absolute top-0 pointer-events-none `}
+            className={`h-[35px] w-[99%] flex items-center absolute top-0 pointer-events-none `}
           >
             <div
               className={`w-[99%] flex items-center transition-transform  bg-white pt-1.5
@@ -84,7 +84,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
                 }`}
             >
               <label
-                className={`block font-normal text-gray-400 text-sm transition-transform origin-left ${
+                className={`flex font-normal text-gray-400 text-sm transition-transform origin-left ${
                   (value || value === "0" || isFocused) && "scale-75"
                 }`}
                 htmlFor={id || props.name}

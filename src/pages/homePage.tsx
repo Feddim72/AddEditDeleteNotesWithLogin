@@ -142,7 +142,9 @@ const HomePage = () => {
             </div>
             <button
               type="submit"
-              className="w-full bg background-btn mt-8 relative"
+              className={`${
+                isLoading && "pointer-events-none"
+              } w-full bg background-btn mt-8 relative`}
             >
               {isLoading ? (
                 <img
