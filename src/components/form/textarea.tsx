@@ -95,7 +95,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
                   {label}
                 </span>
                 {rules?.required === true && (
-                  <span className="text-red-600"> *</span>
+                  <span className="text-red-600 ml-1"> *</span>
                 )}
               </label>
             </div>
