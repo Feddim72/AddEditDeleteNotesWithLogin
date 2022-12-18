@@ -16,6 +16,8 @@ import { useAsync } from "hooks/useAsync";
 import { useState } from "react";
 import { ToastsSticky, viewToast } from "components/common/toastsSticky";
 import { MdDeleteOutline } from "react-icons/md";
+import axios from "axios";
+import { actualUserId, userQueryIdKey, userQueryMailKey } from "utils/auth";
 
 const HomePage = () => {
   const [viewToastState, setViewToastState] = useState<viewToast>({});
@@ -35,8 +37,21 @@ const HomePage = () => {
   const onSubmit = (formDate: IViewLoginModel) => {
     run(
       login(formDate)
-        .then(({ data }) => {
-          navigate(redirectPathname, { state: { email: data } });
+        .then(() => {
+          axios
+            .get(
+              `/User/GetAll?filter=${localStorage.getItem(userQueryMailKey)}`
+            )
+            .then((res) => {
+              localStorage.setItem(
+                userQueryIdKey,
+                "UserId eq " + res.data.data?.[0].id
+              );
+              localStorage.setItem(actualUserId, res.data.data?.[0].id);
+              navigate(redirectPathname, {
+                state: { userId: res.data.data?.[0].id },
+              });
+            });
         })
         .catch((error) => {
           const errorMessage = error.response.data?.errorCode;

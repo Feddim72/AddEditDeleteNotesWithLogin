@@ -19,7 +19,8 @@ import { useState, useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { MdPlaylistAdd } from "react-icons/md";
 import { RiLogoutCircleRLine } from "react-icons/ri";
-import { actualUserIdKey } from "utils/auth";
+import { useLocation } from "react-router-dom";
+import { actualUserId, userQueryIdKey } from "utils/auth";
 
 export interface FormValue {
   details: string;
@@ -36,6 +37,7 @@ const UserLandingPage = () => {
   const [noteDateItems, setNoteDateItems] = useState<JSX.Element[]>();
 
   const { logout } = useAuth();
+  const location = useLocation();
   const methods = useForm<FormValue>({
     defaultValues: {
       details: currentNote?.details,
@@ -75,12 +77,11 @@ const UserLandingPage = () => {
   const closeMoreNoteModal = () => {
     setIsOpenMoreNoteModal(false);
   };
-  const userIdKeyForGetNoteList = localStorage.getItem(actualUserIdKey);
+
   const { isLoading: isLoadingRefetchAllNotes, refetch: refetchAllNotes } =
     useGet<ViewListModelDtoOfViewNoteModelDto>(
-      `/Note/GetAll?filter=${userIdKeyForGetNoteList}`,
+      `/Note/GetAll?filter=${"UserId eq " + location.state.userId}`,
       {
-        enabled: userIdKeyForGetNoteList != null,
         onSuccess({ data }) {
           setNoteDateItems(
             data?.map(
@@ -163,7 +164,7 @@ const UserLandingPage = () => {
       );
     } else {
       addNode({
-        userId: Number(localStorage.getItem(actualUserIdKey)),
+        userId: Number(localStorage.getItem(userQueryIdKey)),
         details: details,
         title: titles,
       });

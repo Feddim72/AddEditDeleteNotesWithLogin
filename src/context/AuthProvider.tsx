@@ -11,18 +11,17 @@ import {
   Suspense,
 } from "react";
 import { useNavigate } from "react-router-dom";
-import { getToken } from "utils/auth";
 import * as auth from "../utils/auth";
 
 const bootstrapAppData = async () => {
   let user = null;
-  const token = await getToken();
+  const token = await auth.getToken();
   try {
     if (token) {
       const {
         data: { email, id, login, password },
       } = await axios.get<ViewUserModelDto>(
-        `/User/Get/${localStorage.getItem(auth.actualUserIdKey)}`
+        `/User/Get/${localStorage.getItem(auth.actualUserId)}`
       );
 
       user = {
@@ -40,7 +39,7 @@ const bootstrapAppData = async () => {
 };
 
 interface AuthContextType {
-  user?: ViewUserModelDto[] | null;
+  user?: ViewUserModelDto | null;
   login: (form: any) => Promise<{
     data: any;
   }>;
@@ -63,7 +62,7 @@ function AuthProvider({ children }: AuthProviderProps) {
     isSuccess,
     run,
     setData,
-  } = useAsync<ViewUserModelDto[]>();
+  } = useAsync<ViewUserModelDto>();
 
   useEffect(() => {
     const appDataPromise = bootstrapAppData();
