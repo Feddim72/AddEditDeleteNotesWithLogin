@@ -20,7 +20,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { MdPlaylistAdd } from "react-icons/md";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { useLocation } from "react-router-dom";
-import { actualUserId, userQueryIdKey } from "utils/auth";
+import { actualUserId } from "utils/auth";
 
 export interface FormValue {
   details: string;
@@ -164,7 +164,7 @@ const UserLandingPage = () => {
       );
     } else {
       addNode({
-        userId: Number(localStorage.getItem(userQueryIdKey)),
+        userId: Number(localStorage.getItem(actualUserId)),
         details: details,
         title: titles,
       });
