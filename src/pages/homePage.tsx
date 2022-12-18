@@ -141,6 +141,7 @@ const HomePage = () => {
               </NavLink>
             </div>
             <button
+              disabled={isLoading}
               type="submit"
               className={`${
                 isLoading && "pointer-events-none"
@@ -149,7 +150,9 @@ const HomePage = () => {
               {isLoading ? (
                 <img
                   src="/loader.svg"
-                  className="w-14 h-14 absolute top-[calc(50%-28px)] left-[calc(50%-28px)]"
+                  className={`${
+                    isLoading && "pointer-events-none"
+                  } w-14 h-14 absolute top-[calc(50%-28px)] left-[calc(50%-28px)]`}
                   alt="loader"
                 />
               ) : (

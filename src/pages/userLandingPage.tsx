@@ -75,12 +75,12 @@ const UserLandingPage = () => {
   const closeMoreNoteModal = () => {
     setIsOpenMoreNoteModal(false);
   };
-  const userIdKeyForGetNoteList =
-    "UserId eq " + localStorage.getItem(actualUserIdKey);
+  const userIdKeyForGetNoteList = localStorage.getItem(actualUserIdKey);
   const { isLoading: isLoadingRefetchAllNotes, refetch: refetchAllNotes } =
     useGet<ViewListModelDtoOfViewNoteModelDto>(
       `/Note/GetAll?filter=${userIdKeyForGetNoteList}`,
       {
+        enabled: userIdKeyForGetNoteList != null,
         onSuccess({ data }) {
           setNoteDateItems(
             data?.map(

@@ -4,7 +4,7 @@ import jwt_decode from "jwt-decode";
 const tokenKey = "token";
 const refreshTokenKey = "refreshToken";
 const userEmailKey = "userEmail";
-const actualUserIdKey = "actualUserId";
+const actualUserIdKey = "actualUserIdKey";
 const userQueryMailKey = "userQueryMailKey";
 const getToken = async () => localStorage.getItem(tokenKey) as string;
 const getRefreshToken = async () =>
@@ -16,12 +16,15 @@ const login = ({ email, password }: IViewLoginModel) =>
     .post<string>("/Auth/Login", { email, password })
     .then(({ data }) => {
       const decoded = jwt_decode<{ email: string }>(data);
+      console.log(decoded);
       localStorage.setItem(tokenKey, data);
       localStorage.setItem(userEmailKey, decoded.email);
       localStorage.setItem(
         userQueryMailKey,
-        "Email eq " + `'` + localStorage.getItem(userEmailKey) + `'`
+        "Email eq " + `'` + decoded.email + `'`
       );
+      console.log(decoded.email);
+      console.log(localStorage.getItem(userEmailKey));
       axios.defaults.headers.common.Authorization = `Bearer ${data}`;
       return decoded.email;
     })
@@ -29,7 +32,10 @@ const login = ({ email, password }: IViewLoginModel) =>
       axios
         .get(`/User/GetAll?filter=${localStorage.getItem(userQueryMailKey)}`)
         .then((res) => {
-          localStorage.setItem(actualUserIdKey, `${res.data.data?.[0].id}`);
+          localStorage.setItem(
+            actualUserIdKey,
+            "UserId eq " + `'` + res.data.data?.[0].id + `'`
+          );
         });
     });
 
